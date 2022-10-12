@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7847D3BB28F69E2700B99E3C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BA28F69E2700B99E3C /* README.md */; };
 		7847D3BD28F69E2A00B99E3C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BC28F69E2A00B99E3C /* LICENSE */; };
+		7847D3C028F6A29F00B99E3C /* DragView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7847D3BF28F6A29F00B99E3C /* DragView.swift */; };
 		788F916528F69D46001BD26F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F916428F69D46001BD26F /* AppDelegate.swift */; };
 		788F916728F69D46001BD26F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F916628F69D46001BD26F /* MainViewController.swift */; };
 		788F916928F69D46001BD26F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788F916828F69D46001BD26F /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		7847D3BA28F69E2700B99E3C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7847D3BC28F69E2A00B99E3C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7847D3BF28F6A29F00B99E3C /* DragView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragView.swift; sourceTree = "<group>"; };
 		788F916128F69D46001BD26F /* MobileProfileExtract.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileProfileExtract.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		788F916428F69D46001BD26F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		788F916628F69D46001BD26F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7847D3BE28F6A29000B99E3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7847D3BF28F6A29F00B99E3C /* DragView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		788F915828F69D46001BD26F = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 			children = (
 				788F916428F69D46001BD26F /* AppDelegate.swift */,
 				788F917528F69D72001BD26F /* Controllers */,
+				7847D3BE28F6A29000B99E3C /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -165,6 +176,7 @@
 			files = (
 				788F916728F69D46001BD26F /* MainViewController.swift in Sources */,
 				788F916528F69D46001BD26F /* AppDelegate.swift in Sources */,
+				7847D3C028F6A29F00B99E3C /* DragView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +312,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MobileProfileExtract/MobileProfileExtract.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MobileProfileExtract/Resources/MobileProfileExtract.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -327,7 +340,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MobileProfileExtract/MobileProfileExtract.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MobileProfileExtract/Resources/MobileProfileExtract.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

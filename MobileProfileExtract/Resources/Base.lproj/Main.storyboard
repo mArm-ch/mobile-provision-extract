@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +675,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MobileProfileExtract" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -700,18 +702,59 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="MobileProfileExtract" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uqb-Et-8Xi">
+                                <rect key="frame" x="95" y="85" width="290" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="IB8-uE-4st"/>
+                                    <constraint firstAttribute="width" constant="290" id="enK-pa-anj"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="extract_icon" id="AaD-cN-Da8"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JNf-8J-yH6">
+                                <rect key="frame" x="18" y="20" width="444" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Drag &amp; drop your .mobileprovision file here to extract it." id="m6P-hQ-nBC">
+                                    <font key="font" size="13" name="HelveticaNeue-ThinItalic"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ug2-fc-gdf" userLabel="DragAndDropView" customClass="DragView" customModule="MobileProfileExtract" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="440" height="230"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Uqb-Et-8Xi" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="BRQ-qI-Lpk"/>
+                            <constraint firstItem="Uqb-Et-8Xi" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="YtI-jZ-DaF"/>
+                            <constraint firstAttribute="bottom" secondItem="JNf-8J-yH6" secondAttribute="bottom" constant="20" id="e8L-em-9TT"/>
+                            <constraint firstAttribute="trailing" secondItem="JNf-8J-yH6" secondAttribute="trailing" constant="20" id="fdK-bO-Izs"/>
+                            <constraint firstAttribute="bottom" secondItem="ug2-fc-gdf" secondAttribute="bottom" constant="20" symbolic="YES" id="foT-mU-31F"/>
+                            <constraint firstItem="JNf-8J-yH6" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="l7K-Fj-c3V"/>
+                            <constraint firstAttribute="trailing" secondItem="ug2-fc-gdf" secondAttribute="trailing" constant="20" symbolic="YES" id="ngk-1M-LsV"/>
+                            <constraint firstItem="ug2-fc-gdf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="no0-Xf-6Mp"/>
+                            <constraint firstItem="ug2-fc-gdf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="xd7-sx-exx"/>
+                            <constraint firstItem="JNf-8J-yH6" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="zOA-Bd-ikm"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="extractionImageView" destination="Uqb-Et-8Xi" id="YQA-si-ERy"/>
+                        <outlet property="extractionLabel" destination="JNf-8J-yH6" id="s4B-Tb-dn8"/>
+                        <outlet property="extractionView" destination="ug2-fc-gdf" id="8iS-iX-Bte"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="extract_icon" width="490" height="400"/>
+    </resources>
 </document>

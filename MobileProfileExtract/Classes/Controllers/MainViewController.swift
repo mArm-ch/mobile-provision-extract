@@ -9,9 +9,14 @@ import Cocoa
 
 class MainViewController: NSViewController {
 
+    @IBOutlet var extractionImageView: NSImageView!
+    @IBOutlet var extractionLabel: NSTextField!
+    @IBOutlet var extractionView: DragView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        extractionLabel.isEditable = false
         // Do any additional setup after loading the view.
     }
 
