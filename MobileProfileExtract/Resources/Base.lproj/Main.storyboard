@@ -719,7 +719,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="extract_icon" id="AaD-cN-Da8"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JNf-8J-yH6">
-                                <rect key="frame" x="18" y="20" width="444" height="16"/>
+                                <rect key="frame" x="18" y="32" width="444" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Drag &amp; drop your .mobileprovision file here to extract it." id="m6P-hQ-nBC">
                                     <font key="font" size="13" name="HelveticaNeue-ThinItalic"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -733,7 +733,7 @@
                         <constraints>
                             <constraint firstItem="Uqb-Et-8Xi" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="BRQ-qI-Lpk"/>
                             <constraint firstItem="Uqb-Et-8Xi" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="YtI-jZ-DaF"/>
-                            <constraint firstAttribute="bottom" secondItem="JNf-8J-yH6" secondAttribute="bottom" constant="20" id="e8L-em-9TT"/>
+                            <constraint firstAttribute="bottom" secondItem="JNf-8J-yH6" secondAttribute="bottom" constant="32" id="e8L-em-9TT"/>
                             <constraint firstAttribute="trailing" secondItem="JNf-8J-yH6" secondAttribute="trailing" constant="20" id="fdK-bO-Izs"/>
                             <constraint firstAttribute="bottom" secondItem="ug2-fc-gdf" secondAttribute="bottom" constant="20" symbolic="YES" id="foT-mU-31F"/>
                             <constraint firstItem="JNf-8J-yH6" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="l7K-Fj-c3V"/>
