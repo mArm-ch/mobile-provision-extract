@@ -1,6 +1,6 @@
 # MobileProvision Extract tool
 
-<img align="left" alt="Version : 0.1.0" src="https://img.shields.io/badge/Version-0.1.0.green.svg" /> <img align="left" alt="Swift : 5" src="https://img.shields.io/badge/Swift-5-blue.svg" /> <img align="left" alt="Licence : MIT" src="https://img.shields.io/badge/Licence-MIT-blue.svg" />
+<img align="left" alt="Version : 0.1.0" src="https://img.shields.io/badge/Version-0.1.0-green.svg" /> <img align="left" alt="Swift : 5" src="https://img.shields.io/badge/Swift-5-blue.svg" /> <img align="left" alt="Licence : MIT" src="https://img.shields.io/badge/Licence-MIT-blue.svg" />
 <br /><br />
 
 ## Introduction
