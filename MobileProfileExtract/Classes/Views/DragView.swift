@@ -31,9 +31,7 @@ class DragView: NSView {
         super.init(coder: coder)
         
         // Drag & Drop
-        if let mobileProvision = NSPasteboard.PasteboardType.fileNameType(forPathExtension: "mobileprovision") {
-            registerForDraggedTypes([mobileProvision])
-        }
+        registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
         self.isMouseDragging = false
         
         // Mouse tracking
@@ -49,12 +47,12 @@ class DragView: NSView {
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         self.fileTypeOk = checkExtension(drag: sender)
         self.isMouseDragging = true
-        return []
+        return self.fileTypeOk ? .copy : NSDragOperation()
     }
     
     override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
         self.isMouseDragging = true
-        return self.fileTypeOk ? .copy : .generic
+        return self.fileTypeOk ? .copy : NSDragOperation()
     }
     
     override func draggingEnded(_ sender: NSDraggingInfo) {
@@ -62,20 +60,69 @@ class DragView: NSView {
     }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        guard let _ = sender.draggedFileURL else {
+        guard let fileURL = sender.draggedFileURL else {
             return false
         }
+        
+        NSLog("Dragged file : \(fileURL)")
+        
+        self.decodeCMSfile(fileURL)
+        
         return true
     }
     
+    /// Check if the extension is allowed
+    ///
+    /// - Important: `fileprivate`
+    ///
+    /// - Parameter drag: The dragging infos
+    /// - Returns: `Bool`
+    ///
     fileprivate func checkExtension(drag: NSDraggingInfo) -> Bool {
-        NSLog("File url : \(drag.draggedFileURL)")
-        guard let fileExtension = drag.draggedFileURL?.pathExtension?.lowercased() else {
+        guard let board = drag.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+              let path = board[0] as? String else {
             return false
         }
-        return acceptedExtensions.contains(fileExtension)
+
+        let suffix = URL(fileURLWithPath: path).pathExtension
+        for ext in self.acceptedExtensions {
+            if ext.lowercased() == suffix {
+                return true
+            }
+        }
+        return false
     }
     
+    
+    // -------------------------------------------------------------------------
+    // MARK: - Data extraction related
+    
+    fileprivate func decodeCMSfile(_ fileToDecode: URL) {
+        do {
+            let profileData = try! Data(contentsOf: fileToDecode)
+            let profile = try! ProvisioningProfile.parse(from: profileData)
+            
+            let tempPath = self.tempPathFor(file: fileToDecode)
+            
+            Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [
+                "-a",
+                "TextEdit",
+                tempPath
+            ])
+        }
+    }
+    
+    fileprivate func tempPathFor(file: URL) -> String {
+        let directory = NSTemporaryDirectory()
+        let path = file.path.components(separatedBy: "/")
+        
+        if let filename = path.last {
+            let parts = filename.components(separatedBy: ".")
+            return "\(directory)\(parts.first ?? Date().formatted())-decoded.txt"
+        }
+        
+        return ""
+    }
     
     // -------------------------------------------------------------------------
     // MARK: - Mouse management
@@ -102,7 +149,7 @@ class DragView: NSView {
     }
     
     private func updateBackgroundColor() {
-        if self.isMouseDragging && self.isMouseOverTheView {
+        if self.isMouseDragging && self.isMouseOverTheView && self.fileTypeOk {
             self.backgroundColor = self.backgroundActiveColor
         } else {
             self.backgroundColor = nil
@@ -124,10 +171,11 @@ class DragView: NSView {
 }
 
 extension NSDraggingInfo {
-    var draggedFileURL: NSURL? {
-        let filenames = draggingPasteboard.readObjects(forClasses: [NSURL.self]) as? [String]
-        let path = filenames?.first
-        
-        return path.map(NSURL.init)
+    var draggedFileURL: URL? {
+        guard let board = self.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+              let path = board[0] as? String else {
+            return nil
+        }
+        return URL(fileURLWithPath: path)
     }
 }

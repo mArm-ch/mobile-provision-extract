@@ -20,6 +20,12 @@ class MainViewController: NSViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        self.view.window?.title = "MobileProvision Extract"
+    }
+    
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7804316628F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804315E28F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift */; };
+		7804316728F6BCEB00F36E73 /* ProvisioningProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316028F6BCEB00F36E73 /* ProvisioningProfile.swift */; };
+		7804316828F6BCEB00F36E73 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316128F6BCEB00F36E73 /* Certificate.swift */; };
+		7804316928F6BCEB00F36E73 /* DeveloperCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316228F6BCEB00F36E73 /* DeveloperCertificate.swift */; };
+		7804316A28F6BCEB00F36E73 /* PropertyListDictionaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316328F6BCEB00F36E73 /* PropertyListDictionaryValue.swift */; };
+		7804316B28F6BCEB00F36E73 /* SwiftyCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316428F6BCEB00F36E73 /* SwiftyCertificate.swift */; };
+		7804316C28F6BCEB00F36E73 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316528F6BCEB00F36E73 /* SwiftyCMSDecoder.swift */; };
 		7847D3BB28F69E2700B99E3C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BA28F69E2700B99E3C /* README.md */; };
 		7847D3BD28F69E2A00B99E3C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BC28F69E2A00B99E3C /* LICENSE */; };
 		7847D3C028F6A29F00B99E3C /* DragView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7847D3BF28F6A29F00B99E3C /* DragView.swift */; };
@@ -17,6 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7804315E28F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyProvisioningProfile.swift; sourceTree = "<group>"; };
+		7804316028F6BCEB00F36E73 /* ProvisioningProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvisioningProfile.swift; sourceTree = "<group>"; };
+		7804316128F6BCEB00F36E73 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
+		7804316228F6BCEB00F36E73 /* DeveloperCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperCertificate.swift; sourceTree = "<group>"; };
+		7804316328F6BCEB00F36E73 /* PropertyListDictionaryValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListDictionaryValue.swift; sourceTree = "<group>"; };
+		7804316428F6BCEB00F36E73 /* SwiftyCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCertificate.swift; sourceTree = "<group>"; };
+		7804316528F6BCEB00F36E73 /* SwiftyCMSDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCMSDecoder.swift; sourceTree = "<group>"; };
 		7847D3BA28F69E2700B99E3C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7847D3BC28F69E2A00B99E3C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7847D3BF28F6A29F00B99E3C /* DragView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragView.swift; sourceTree = "<group>"; };
@@ -39,6 +53,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7804315C28F6BCEB00F36E73 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				7804315D28F6BCEB00F36E73 /* SwiftyProvisioningProfile */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		7804315D28F6BCEB00F36E73 /* SwiftyProvisioningProfile */ = {
+			isa = PBXGroup;
+			children = (
+				7804315E28F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift */,
+				7804315F28F6BCEB00F36E73 /* Model */,
+				7804316428F6BCEB00F36E73 /* SwiftyCertificate.swift */,
+				7804316528F6BCEB00F36E73 /* SwiftyCMSDecoder.swift */,
+			);
+			path = SwiftyProvisioningProfile;
+			sourceTree = "<group>";
+		};
+		7804315F28F6BCEB00F36E73 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7804316028F6BCEB00F36E73 /* ProvisioningProfile.swift */,
+				7804316128F6BCEB00F36E73 /* Certificate.swift */,
+				7804316228F6BCEB00F36E73 /* DeveloperCertificate.swift */,
+				7804316328F6BCEB00F36E73 /* PropertyListDictionaryValue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7847D3BE28F6A29000B99E3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				788F917428F69D6A001BD26F /* Classes */,
+				7804315C28F6BCEB00F36E73 /* External */,
 				788F917328F69D64001BD26F /* Resources */,
 			);
 			path = MobileProfileExtract;
@@ -174,8 +219,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7804316C28F6BCEB00F36E73 /* SwiftyCMSDecoder.swift in Sources */,
+				7804316A28F6BCEB00F36E73 /* PropertyListDictionaryValue.swift in Sources */,
+				7804316928F6BCEB00F36E73 /* DeveloperCertificate.swift in Sources */,
+				7804316628F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift in Sources */,
 				788F916728F69D46001BD26F /* MainViewController.swift in Sources */,
+				7804316B28F6BCEB00F36E73 /* SwiftyCertificate.swift in Sources */,
 				788F916528F69D46001BD26F /* AppDelegate.swift in Sources */,
+				7804316828F6BCEB00F36E73 /* Certificate.swift in Sources */,
+				7804316728F6BCEB00F36E73 /* ProvisioningProfile.swift in Sources */,
 				7847D3C028F6A29F00B99E3C /* DragView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
