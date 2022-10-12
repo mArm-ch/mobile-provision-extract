@@ -10,13 +10,13 @@ import Security
 
 public extension Certificate {
     
-    public enum ParseError: Error {
+    enum ParseError: Error {
         case failedToCreateCertificate
         case failedToCreateTrust
         case failedToExtractValues
     }
     
-    public static func parse(from data: Data) throws -> Certificate {
+    static func parse(from data: Data) throws -> Certificate {
         let certificate = try getSecCertificate(data: data)
         
         var error: Unmanaged<CFError>?

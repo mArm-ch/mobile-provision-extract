@@ -101,14 +101,26 @@ class DragView: NSView {
         do {
             let profileData = try! Data(contentsOf: fileToDecode)
             let profile = try! ProvisioningProfile.parse(from: profileData)
-            
             let tempPath = self.tempPathFor(file: fileToDecode)
             
-            Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [
-                "-a",
-                "TextEdit",
-                tempPath
-            ])
+            if let tempPathURL = URL(string: "file://\(tempPath)") {
+                let fileContents = self.buildDecodedFile(with: profile)
+                do {
+                    try fileContents.write(to: tempPathURL, atomically: true, encoding: .utf8)
+                } catch {
+                    print(error.localizedDescription)
+                    // TODO: Display error alert
+                }
+                
+                Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [
+                    "-a",
+                    "TextEdit",
+                    tempPath
+                ])
+            } else {
+                // TODO: Display error message
+            }
+            
         }
     }
     
@@ -122,6 +134,55 @@ class DragView: NSView {
         }
         
         return ""
+    }
+    
+    fileprivate func buildDecodedFile(with profile: ProvisioningProfile) -> String {
+        var output = "AppIDName: \(profile.appIdName)"
+        output = "\(output)\n\nApplicationIdentifierPrefixs :\n\(profile.applicationIdentifierPrefixs)"
+        output = "\(output)\n\nCreationDate: \(profile.creationDate)"
+        
+        output = "\(output)\n\nPlatforms:\n"
+        for plateform in profile.platforms {
+            output = "\(output)- \(plateform)\n"
+        }
+        
+        output = "\(output)\nDeveloperCertificates:\n"
+        for certificate in profile.developerCertificates {
+            output = "\(output)- \(certificate.certificate?.commonName ?? "Unknown")\n"
+        }
+        
+        output = "\(output)\nEntitlements:\n"
+        for entitlement in profile.entitlements {
+            // TODO: Extract clean value
+            let value = entitlement.value
+            output = "\(output)- \(entitlement.key) => \(value)\n"
+        }
+        
+        output = "\(output)\n\nExpirationDate: \(profile.expirationDate)"
+        output = "\(output)\n\nName: \(profile.name)"
+        
+        output = "\(output)\n\nProvisionedDevices:"
+        if let devices = profile.provisionedDevices {
+            output = "\(output)\n"
+            for device in devices {
+                output = "\(output)- \(device)\n"
+            }
+        } else {
+            output = "\(output) None\n"
+        }
+        
+        
+        output = "\(output)\nTeamIdentifiers:\n\"
+        for identifier in profile.teamIdentifiers {
+            output = "\(output)- \(identifier)\n"
+        }
+        
+        
+        output = "\(output)\n\nTeamName: \(profile.teamName)"
+        output = "\(output)\n\nTimeToLive: \(profile.timeToLive)"
+        output = "\(output)\n\nUUID: \(profile.uuid)"
+        output = "\(output)\n\nVersion: \(profile.version)"
+        return output
     }
     
     // -------------------------------------------------------------------------
