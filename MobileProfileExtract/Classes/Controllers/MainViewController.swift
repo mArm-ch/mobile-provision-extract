@@ -41,7 +41,6 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         
         extractionLabel.isEditable = false
-        // Do any additional setup after loading the view.
     }
     
     /// View will appear

@@ -21,6 +21,7 @@
 		788F916728F69D46001BD26F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F916628F69D46001BD26F /* MainViewController.swift */; };
 		788F916928F69D46001BD26F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788F916828F69D46001BD26F /* Assets.xcassets */; };
 		788F916C28F69D46001BD26F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 788F916A28F69D46001BD26F /* Main.storyboard */; };
+		78DA70B328F7F12F00B73220 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DA70B228F7F12F00B73220 /* Output.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		788F916828F69D46001BD26F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		788F916B28F69D46001BD26F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		788F916D28F69D46001BD26F /* MobileProfileExtract.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobileProfileExtract.entitlements; sourceTree = "<group>"; };
+		78DA70B228F7F12F00B73220 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			children = (
 				788F916428F69D46001BD26F /* AppDelegate.swift */,
 				788F917528F69D72001BD26F /* Controllers */,
+				78DA70B128F7F12000B73220 /* Helpers */,
 				7847D3BE28F6A29000B99E3C /* Views */,
 			);
 			path = Classes;
@@ -145,6 +148,14 @@
 				788F916628F69D46001BD26F /* MainViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		78DA70B128F7F12000B73220 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				78DA70B228F7F12F00B73220 /* Output.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +233,7 @@
 				7804316C28F6BCEB00F36E73 /* SwiftyCMSDecoder.swift in Sources */,
 				7804316A28F6BCEB00F36E73 /* PropertyListDictionaryValue.swift in Sources */,
 				7804316928F6BCEB00F36E73 /* DeveloperCertificate.swift in Sources */,
+				78DA70B328F7F12F00B73220 /* Output.swift in Sources */,
 				7804316628F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift in Sources */,
 				788F916728F69D46001BD26F /* MainViewController.swift in Sources */,
 				7804316B28F6BCEB00F36E73 /* SwiftyCertificate.swift in Sources */,
@@ -372,6 +384,8 @@
 				DEVELOPMENT_TEAM = 8AMHZB54JX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "MobileProfile Extract";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -400,6 +414,8 @@
 				DEVELOPMENT_TEAM = 8AMHZB54JX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "MobileProfile Extract";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

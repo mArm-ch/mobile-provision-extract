@@ -39,7 +39,7 @@ class DragView: NSView {
     private var acceptedExtensions: [String] = ["mobileprovision"]
     
     /// The background color when drag&drop is active on the view
-    private let backgroundActiveColor = NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3)
+    private let backgroundActiveColor = NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
     /// The background color when drag&drop is not active on the view
     private let backgroundInactiveColor = NSColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
     
@@ -54,6 +54,7 @@ class DragView: NSView {
     /// The current background
     private var backgroundColor: NSColor? {
         didSet {
+            if let backgroundColor = backgroundColor { self.layer?.backgroundColor = backgroundColor.cgColor }
             setNeedsDisplay(bounds)
         }
     }
@@ -157,7 +158,7 @@ class DragView: NSView {
             let tempPath = self.tempPathFor(file: fileToDecode)
             
             if let tempPathURL = URL(string: "file://\(tempPath)") {
-                let fileContents = self.buildDecodedFile(with: profile)
+                let fileContents = Output.buildDecodedFile(with: profile, originalFileURL: fileToDecode)
                 do {
                     try fileContents.write(to: tempPathURL, atomically: true, encoding: .utf8)
                     Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [
@@ -197,60 +198,6 @@ class DragView: NSView {
         return ""
     }
     
-    /// Build the decoded file output
-    ///
-    /// - Important: `fileprivate`
-    ///
-    /// - Parameter profile: The decoded provisioning profile
-    /// - Returns: `String`
-    ///
-    fileprivate func buildDecodedFile(with profile: ProvisioningProfile) -> String {
-        var output = "AppIDName: \(profile.appIdName)"
-        output = "\(output)\n\nApplicationIdentifierPrefixs :\n\(profile.applicationIdentifierPrefixs)"
-        output = "\(output)\n\nCreationDate: \(profile.creationDate)"
-        
-        output = "\(output)\n\nPlatforms:\n"
-        for plateform in profile.platforms {
-            output = "\(output)- \(plateform)\n"
-        }
-        
-        output = "\(output)\nDeveloperCertificates:\n"
-        for certificate in profile.developerCertificates {
-            output = "\(output)- \(certificate.certificate?.commonName ?? "Unknown")\n"
-        }
-        
-        output = "\(output)\nEntitlements:\n"
-        for entitlement in profile.entitlements {
-            // TODO: Extract clean value
-            let value = entitlement.value
-            output = "\(output)- \(entitlement.key) => \(value)\n"
-        }
-        
-        output = "\(output)\n\nExpirationDate: \(profile.expirationDate)"
-        output = "\(output)\n\nName: \(profile.name)"
-        
-        output = "\(output)\n\nProvisionedDevices:"
-        if let devices = profile.provisionedDevices {
-            output = "\(output)\n"
-            for device in devices {
-                output = "\(output)- \(device)\n"
-            }
-        } else {
-            output = "\(output) None\n"
-        }
-        
-        output = "\(output)\nTeamIdentifiers:\n"
-        for identifier in profile.teamIdentifiers {
-            output = "\(output)- \(identifier)\n"
-        }
-        
-        
-        output = "\(output)\n\nTeamName: \(profile.teamName)"
-        output = "\(output)\n\nTimeToLive: \(profile.timeToLive)"
-        output = "\(output)\n\nUUID: \(profile.uuid)"
-        output = "\(output)\n\nVersion: \(profile.version)"
-        return output
-    }
     
     // -------------------------------------------------------------------------
     // MARK: - Mouse management
@@ -294,7 +241,7 @@ class DragView: NSView {
         if self.isMouseDragging && self.isMouseOverTheView && self.fileTypeOk {
             self.backgroundColor = self.backgroundActiveColor
         } else {
-            self.backgroundColor = nil
+            self.backgroundColor = self.backgroundInactiveColor
         }
     }
     

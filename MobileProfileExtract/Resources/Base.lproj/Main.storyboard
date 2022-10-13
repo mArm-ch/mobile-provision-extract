@@ -726,7 +726,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ug2-fc-gdf" userLabel="DragAndDropView" customClass="DragView" customModule="MobileProfileExtract" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ug2-fc-gdf" userLabel="DragAndDrop View" customClass="DragView" customModule="MobileProfileExtract" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="440" height="230"/>
                             </customView>
                         </subviews>
@@ -755,6 +755,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="extract_icon" width="490" height="400"/>
+        <image name="extract_icon" width="128" height="128"/>
     </resources>
 </document>
