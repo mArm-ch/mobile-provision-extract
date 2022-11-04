@@ -14,6 +14,8 @@
 		7804316A28F6BCEB00F36E73 /* PropertyListDictionaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316328F6BCEB00F36E73 /* PropertyListDictionaryValue.swift */; };
 		7804316B28F6BCEB00F36E73 /* SwiftyCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316428F6BCEB00F36E73 /* SwiftyCertificate.swift */; };
 		7804316C28F6BCEB00F36E73 /* SwiftyCMSDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804316528F6BCEB00F36E73 /* SwiftyCMSDecoder.swift */; };
+		7816EF4E2915485E00DEDB55 /* XmlOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7816EF4D2915485E00DEDB55 /* XmlOutput.swift */; };
+		7816EF502915487600DEDB55 /* PlistOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7816EF4F2915487600DEDB55 /* PlistOutput.swift */; };
 		7847D3BB28F69E2700B99E3C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BA28F69E2700B99E3C /* README.md */; };
 		7847D3BD28F69E2A00B99E3C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7847D3BC28F69E2A00B99E3C /* LICENSE */; };
 		7847D3C028F6A29F00B99E3C /* DragView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7847D3BF28F6A29F00B99E3C /* DragView.swift */; };
@@ -33,6 +35,8 @@
 		7804316328F6BCEB00F36E73 /* PropertyListDictionaryValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListDictionaryValue.swift; sourceTree = "<group>"; };
 		7804316428F6BCEB00F36E73 /* SwiftyCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCertificate.swift; sourceTree = "<group>"; };
 		7804316528F6BCEB00F36E73 /* SwiftyCMSDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCMSDecoder.swift; sourceTree = "<group>"; };
+		7816EF4D2915485E00DEDB55 /* XmlOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlOutput.swift; sourceTree = "<group>"; };
+		7816EF4F2915487600DEDB55 /* PlistOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistOutput.swift; sourceTree = "<group>"; };
 		7847D3BA28F69E2700B99E3C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7847D3BC28F69E2A00B99E3C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7847D3BF28F6A29F00B99E3C /* DragView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragView.swift; sourceTree = "<group>"; };
@@ -156,7 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				78B315D42915029E0005BFDA /* OutputGenerator.swift */,
+				7816EF4F2915487600DEDB55 /* PlistOutput.swift */,
 				78DA70B228F7F12F00B73220 /* TextOutput.swift */,
+				7816EF4D2915485E00DEDB55 /* XmlOutput.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -236,10 +242,12 @@
 				78B315D52915029E0005BFDA /* OutputGenerator.swift in Sources */,
 				7804316C28F6BCEB00F36E73 /* SwiftyCMSDecoder.swift in Sources */,
 				7804316A28F6BCEB00F36E73 /* PropertyListDictionaryValue.swift in Sources */,
+				7816EF502915487600DEDB55 /* PlistOutput.swift in Sources */,
 				7804316928F6BCEB00F36E73 /* DeveloperCertificate.swift in Sources */,
 				78DA70B328F7F12F00B73220 /* TextOutput.swift in Sources */,
 				7804316628F6BCEB00F36E73 /* SwiftyProvisioningProfile.swift in Sources */,
 				788F916728F69D46001BD26F /* MainViewController.swift in Sources */,
+				7816EF4E2915485E00DEDB55 /* XmlOutput.swift in Sources */,
 				7804316B28F6BCEB00F36E73 /* SwiftyCertificate.swift in Sources */,
 				788F916528F69D46001BD26F /* AppDelegate.swift in Sources */,
 				7804316828F6BCEB00F36E73 /* Certificate.swift in Sources */,
