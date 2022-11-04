@@ -111,6 +111,9 @@ class DragView: NSView {
     ///
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         guard let fileURL = sender.draggedFileURL else { return false }
+        
+        self.askForOutputType(forFile: fileURL)
+        
         if !self.decodeCMSfile(fileURL) {
             // TODO: Display error alert
         }
@@ -143,6 +146,12 @@ class DragView: NSView {
     // -------------------------------------------------------------------------
     // MARK: - Data extraction related
     
+    fileprivate func askForOutputType(forFile: URL) {
+        
+
+        
+    }
+    
     /// Decode the mobile provisioning profile
     ///
     /// - Important: `@discardableResult`, `fileprivate`
@@ -158,7 +167,7 @@ class DragView: NSView {
             let tempPath = self.tempPathFor(file: fileToDecode)
             
             if let tempPathURL = URL(string: "file://\(tempPath)") {
-                let fileContents = Output.buildDecodedFile(with: profile, originalFileURL: fileToDecode)
+                let fileContents = TextOutput.buildDecodedFile(with: profile, originalFileURL: fileToDecode)
                 do {
                     try fileContents.write(to: tempPathURL, atomically: true, encoding: .utf8)
                     Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [

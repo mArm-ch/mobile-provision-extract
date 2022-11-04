@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class Output {
+class TextOutput: OutputGenerator {
     
     /// Build the decoded file output
     ///
