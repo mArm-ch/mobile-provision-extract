@@ -64,29 +64,27 @@ class XmlOutput: OutputGenerator {
         }
         output = "\(output)\t</entitlements>\n"
         
-        output = "\(output)\n\nExpirationDate: \(profile.expirationDate)"
-        output = "\(output)\n\nName: \(profile.name)"
+        output = "\(output)\t<expirationDate>\(profile.expirationDate)</expirationDate>\n"
+        output = "\(output)\t<name>\(profile.name)</name>\n"
         
-        output = "\(output)\n\nProvisionedDevices:"
+        output = "\(output)\t<provisionedDevices>\n"
         if let devices = profile.provisionedDevices {
-            output = "\(output)\n"
             for device in devices {
-                output = "\(output)- \(device)\n"
+                output = "\(output)\t\t<device>\(device)</device>\n"
             }
-        } else {
-            output = "\(output) None\n"
         }
+        output = "\(output)\t<provisionedDevices>\n"
         
-        output = "\(output)\nTeamIdentifiers:\n"
+        output = "\(output)\t<teamIdentifiers>\n"
         for identifier in profile.teamIdentifiers {
-            output = "\(output)- \(identifier)\n"
+            output = "\(output)\t\t<identifier>\(identifier)</identifier>\n"
         }
+        output = "\(output)\t</teamIdentifiers>\n"
         
-        
-        output = "\(output)\n\nTeamName: \(profile.teamName)"
-        output = "\(output)\n\nTimeToLive: \(profile.timeToLive)"
-        output = "\(output)\n\nUUID: \(profile.uuid)"
-        output = "\(output)\n\nVersion: \(profile.version)"
+        output = "\(output)\t<teamName>\(profile.teamName)</teamName>\n"
+        output = "\(output)\t<timeToLive>\(profile.timeToLive)</timeToLive>\n"
+        output = "\(output)\t<UUID>\(profile.uuid)</UUID>\n"
+        output = "\(output)\t<version>\(profile.version)</version>\n"
         
         output = "\(output)</profile>\n"
         return output
