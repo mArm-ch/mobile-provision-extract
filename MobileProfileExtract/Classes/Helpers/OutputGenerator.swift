@@ -11,8 +11,16 @@ enum OutputGeneratorType: String, CaseIterable {
     case Text = "txt"
     case Xml = "xml"
     case Plist = "plist"
+    
+    func generator() -> OutputGenerator {
+        switch self {
+        case .Text:     return TextOutput()
+        case .Xml:      return XmlOutput()
+        case .Plist:    return PlistOutput()
+        }
+    }
 }
 
 protocol OutputGenerator {
-    static func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String
+    func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String
 }

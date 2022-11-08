@@ -181,18 +181,8 @@ class DragView: NSView {
             let tempPath = self.tempPathFor(file: fileToDecode, output: output)
             
             if let tempPathURL = URL(string: "file://\(tempPath)") {
-                var fileContents: String = ""
-                switch output {
-                case .Text:
-                    fileContents = TextOutput.buildDecodedFile(with: profile,
-                                                               originalFileURL: fileToDecode)
-                case .Xml:
-                    fileContents = XmlOutput.buildDecodedFile(with: profile,
-                                                               originalFileURL: fileToDecode)
-                case .Plist:
-                    fileContents = PlistOutput.buildDecodedFile(with: profile,
-                                                               originalFileURL: fileToDecode)
-                }
+                var fileContents = output.generator().buildDecodedFile(with: profile,
+                                                                       originalFileURL: fileToDecode)
                 
                 // Try to open the file in TextEdit
                 do {

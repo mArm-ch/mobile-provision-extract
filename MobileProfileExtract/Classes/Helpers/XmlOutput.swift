@@ -11,13 +11,11 @@ class XmlOutput: OutputGenerator {
     
     /// Build the decoded file output
     ///
-    /// - Important: `fileprivate`
-    ///
     /// - Parameter profile: The decoded provisioning profile
     /// - Parameter originalFileURL: The url to the original file
     /// - Returns: `String`
     ///
-    public static func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String {
+    public func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String {
         
         // File header
         var output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

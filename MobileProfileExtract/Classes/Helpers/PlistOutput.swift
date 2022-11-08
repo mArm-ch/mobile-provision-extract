@@ -4,6 +4,8 @@
 //
 //  Created by David Ansermot on 04.11.22.
 //
+//  Ref : https://wiki.cmdreporter.com/support/solutions/articles/12000060393-full-example-plist
+//
 
 import Cocoa
 
@@ -11,16 +13,17 @@ class PlistOutput: OutputGenerator {
     
     /// Build the decoded file output
     ///
-    /// - Important: `fileprivate`
-    ///
     /// - Parameter profile: The decoded provisioning profile
     /// - Parameter originalFileURL: The url to the original file
     /// - Returns: `String`
     ///
-    public static func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String {
+    public func buildDecodedFile(with profile: ProvisioningProfile, originalFileURL: URL) -> String {
+        var output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        output = "\(output)<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
+        output = "\(output)<plist version=\"1.0\">\n"
+        output = "\(output)<dict>\n"
         
-        var output = "* ----------------------------------------------------------- *"
-        output = "\(output)\n*"
+        output = "\(output)\n"
         output = "\(output)\n* Original file : \n* \(originalFileURL.path)"
         output = "\(output)\n*"
         if let version  = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
@@ -80,6 +83,7 @@ class PlistOutput: OutputGenerator {
         output = "\(output)\n\nUUID: \(profile.uuid)"
         output = "\(output)\n\nVersion: \(profile.version)"
         
+        output = "\(output)</dict>"
         return output
     }
 }
