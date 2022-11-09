@@ -23,67 +23,114 @@ class PlistOutput: OutputGenerator {
         output = "\(output)<plist version=\"1.0\">\n"
         output = "\(output)<dict>\n"
         
-        output = "\(output)\n"
-        output = "\(output)\n* Original file : \n* \(originalFileURL.path)"
-        output = "\(output)\n*"
+        // Header
+        //
+        output = "\(output)\t<key>header</key>\n"
+        output = "\(output)\t<dict>\n"
+        output = "\(output)\t\t<key>generator</key>\n"
+        output = "\(output)\t\t<string>MobileProfileExtract</string>\n"
+        
         if let version  = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
-            output = "\(output)\n*\n* Generated with 'MobileProfileExtract \(version)' by David Ansermot"
-            output = "\(output)\n* Github : https://github.com/mArm-ch/mobile-provision-extract"
-            output = "\(output)\n*"
-            
+            output = "\(output)\t\t<key>version</key>\n"
+            output = "\(output)\t\t<string>\(version)</string>\n"
         }
-        output = "\(output)\n* ----------------------------------------------------------- *"
         
-        output = "\(output)\n\nAppIDName: \(profile.appIdName)"
-        output = "\(output)\n\nApplicationIdentifierPrefixs :\n"
+        output = "\(output)\t\t<key>author</key>\n"
+        output = "\(output)\t\t<string>David Ansermot</string>\n"
+        
+        output = "\(output)\t\t<key>github</key>\n"
+        output = "\(output)\t\t<string>https://github.com/mArm-ch/mobile-provision-extract</string>\n"
+        
+        output = "\(output)\t\t<key>originalFile</key>\n"
+        output = "\(output)\t\t<string>\(originalFileURL.path)</string>\n"
+        
+        output = "\(output)\t</dict>\n"
+        
+        
+        // Body
+        //
+        output = "\(output)\t<key>profile</key>\n"
+        output = "\(output)\t<dict>\n"
+        
+        output = "\(output)\t\t<key>appIdName</key>\n"
+        output = "\(output)\t\t<string>\(profile.appIdName)</string>\n"
+        
+        output = "\(output)\t\t<key>applicationIdentifierPrefixes</key>\n"
+        output = "\(output)\t\t<array>\n"
         for prefix in profile.applicationIdentifierPrefixs {
-            output = "\(output)- \(prefix)\n"
+            output = "\(output)\t\t\t<string>\(prefix)</string>\n"
         }
+        output = "\(output)\t\t</array>\n"
         
-        output = "\(output)\n\nCreationDate: \(profile.creationDate)"
+        output = "\(output)\t\t<key>creationDate</key>\n"
+        output = "\(output)\t\t<string>\(profile.creationDate)</string>\n"
         
-        output = "\(output)\n\nPlatforms:\n"
+        output = "\(output)\t\t<key>platforms</key>\n"
+        output = "\(output)\t\t<array>\n"
         for plateform in profile.platforms {
-            output = "\(output)- \(plateform)\n"
+            output = "\(output)\t\t\t<string>\(plateform)</string>\n"
         }
+        output = "\(output)\t\t</array>\n"
         
-        output = "\(output)\nDeveloperCertificates:\n"
+        output = "\(output)\t\t<key>developerCertificates</key>\n"
+        output = "\(output)\t\t<array>\n"
         for certificate in profile.developerCertificates {
-            output = "\(output)- \(certificate.certificate?.commonName ?? "Unknown")\n"
+            output = "\(output)\t\t\t<string>\(certificate.certificate?.commonName ?? "Unknown")</string>\n"
         }
+        output = "\(output)\t\t</array>\n"
         
-        output = "\(output)\nEntitlements:\n"
+        output = "\(output)\t\t<key>entitlements</key>\n"
+        output = "\(output)\t\t<array>\n"
         for entitlement in profile.entitlements {
-            // TODO: Extract clean value
             let value = entitlement.value
-            output = "\(output)- \(entitlement.key) => \(value)\n"
+            output = "\(output)\t\t\t<dict>\n"
+            output = "\(output)\t\t\t\t<key>key</key>\n"
+            output = "\(output)\t\t\t\t<string>\(entitlement.key)</string>\n"
+            output = "\(output)\t\t\t\t<key>value</key>\n"
+            output = "\(output)\t\t\t\t<string>\(value)</string>\n"
+            output = "\(output)\t\t\t</dict>\n"
         }
+        output = "\(output)\t\t</array>\n"
         
-        output = "\(output)\n\nExpirationDate: \(profile.expirationDate)"
-        output = "\(output)\n\nName: \(profile.name)"
+        output = "\(output)\t\t<key>expirationDate</key>\n"
+        output = "\(output)\t\t<string>\(profile.expirationDate)</string>\n"
         
-        output = "\(output)\n\nProvisionedDevices:"
+        output = "\(output)\t\t<key>name</key>\n"
+        output = "\(output)\t\t<string>\(profile.name)</string>\n"
+        
+        output = "\(output)\t\t<key>provisionedDevices</key>\n"
+        output = "\(output)\t\t<array>\n"
         if let devices = profile.provisionedDevices {
-            output = "\(output)\n"
             for device in devices {
-                output = "\(output)- \(device)\n"
+                output = "\(output)\t\t\t<string>\(device)</string>\n"
             }
-        } else {
-            output = "\(output) None\n"
         }
+        output = "\(output)\t\t</array>\n"
         
-        output = "\(output)\nTeamIdentifiers:\n"
+        output = "\(output)\t\t<key>teamIdentifiers</key>\n"
+        output = "\(output)\t\t<array>\n"
         for identifier in profile.teamIdentifiers {
-            output = "\(output)- \(identifier)\n"
+            output = "\(output)\t\t\t<string>\(identifier)</string>\n"
         }
+        output = "\(output)\t\t</array>\n"
         
+        output = "\(output)\t\t<key>teamName</key>\n"
+        output = "\(output)\t\t<string>\(profile.teamName)</string>\n"
         
-        output = "\(output)\n\nTeamName: \(profile.teamName)"
-        output = "\(output)\n\nTimeToLive: \(profile.timeToLive)"
-        output = "\(output)\n\nUUID: \(profile.uuid)"
-        output = "\(output)\n\nVersion: \(profile.version)"
+        output = "\(output)\t\t<key>timeToLive</key>\n"
+        output = "\(output)\t\t<string>\(profile.timeToLive)</string>\n"
         
-        output = "\(output)</dict>"
+        output = "\(output)\t\t<key>UUID</key>\n"
+        output = "\(output)\t\t<string>\(profile.uuid)</string>\n"
+        
+        output = "\(output)\t\t<key>version</key>\n"
+        output = "\(output)\t\t<string>\(profile.version)</string>\n"
+        
+        output = "\(output)\t</dict>\n"
+
+        output = "\(output)</dict>\n"
+        
+        output = "\(output)</plist>\n"
         return output
     }
 }
