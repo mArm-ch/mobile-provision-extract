@@ -111,7 +111,10 @@ class DragView: NSView {
     ///
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         guard let fileURL = sender.draggedFileURL else { return false }
-        if !self.decodeCMSfile(fileURL) {
+        
+        let outputType = self.askForOutputType(forFile: fileURL)
+        
+        if !self.decodeCMSfile(fileURL, output: outputType) {
             // TODO: Display error alert
         }
         return true
@@ -143,6 +146,26 @@ class DragView: NSView {
     // -------------------------------------------------------------------------
     // MARK: - Data extraction related
     
+    fileprivate func askForOutputType(forFile: URL) -> OutputGeneratorType {
+        
+        let alert = NSAlert();
+        alert.messageText = "Extraction format"
+        alert.informativeText = "Please, choose the format of the output file."
+        
+        alert.addButton(withTitle: "Text")
+        alert.addButton(withTitle: "XML")
+        alert.addButton(withTitle: "Plist")
+        
+        let response = alert.runModal()
+        
+        switch response {
+        case .alertFirstButtonReturn:   return .Text
+        case .alertSecondButtonReturn:  return .Xml
+        case .alertThirdButtonReturn:   return .Plist
+        default:                        return .Text
+        }
+    }
+    
     /// Decode the mobile provisioning profile
     ///
     /// - Important: `@discardableResult`, `fileprivate`
@@ -151,14 +174,17 @@ class DragView: NSView {
     /// - Returns: `Bool`
     ///
     @discardableResult
-    fileprivate func decodeCMSfile(_ fileToDecode: URL) -> Bool {
+    fileprivate func decodeCMSfile(_ fileToDecode: URL, output: OutputGeneratorType) -> Bool {
         do {
             let profileData = try Data(contentsOf: fileToDecode)
             let profile = try ProvisioningProfile.parse(from: profileData)
-            let tempPath = self.tempPathFor(file: fileToDecode)
+            let tempPath = self.tempPathFor(file: fileToDecode, output: output)
             
             if let tempPathURL = URL(string: "file://\(tempPath)") {
-                let fileContents = Output.buildDecodedFile(with: profile, originalFileURL: fileToDecode)
+                var fileContents = output.generator().buildDecodedFile(with: profile,
+                                                                       originalFileURL: fileToDecode)
+                
+                // Try to open the file in TextEdit
                 do {
                     try fileContents.write(to: tempPathURL, atomically: true, encoding: .utf8)
                     Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [
@@ -187,13 +213,13 @@ class DragView: NSView {
     /// - Parameter file: The URL to the file to generate the temp path
     /// - Returns: `String`
     ///
-    fileprivate func tempPathFor(file: URL) -> String {
+    fileprivate func tempPathFor(file: URL, output: OutputGeneratorType) -> String {
         let directory = NSTemporaryDirectory()
         let path = file.path.components(separatedBy: "/")
         
         if let filename = path.last {
             let parts = filename.components(separatedBy: ".")
-            return "\(directory)\(parts.first ?? Date().formatted())-decoded.txt"
+            return "\(directory)\(parts.first ?? Date().formatted())-decoded.\(output.rawValue)"
         }
         return ""
     }
